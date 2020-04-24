@@ -6,8 +6,11 @@ import 'package:mygoalsapp/ui/widgets/icon_conainer.dart';
 
 class ListOfGoals extends StatefulWidget {
   final List<GoalItem> goals;
+  final Function deleteItem;
+  final Function updateItem;
 
-  const ListOfGoals({Key key, this.goals}) : super(key: key);
+  const ListOfGoals({Key key, this.goals, this.deleteItem, this.updateItem})
+      : super(key: key);
 
   @override
   _ListOfGoalsState createState() => _ListOfGoalsState();
@@ -21,8 +24,10 @@ class _ListOfGoalsState extends State<ListOfGoals> {
         itemBuilder: (context, index) {
           return Slidable(
             actionPane: SlidableStrechActionPane(),
-            actions: actions,
-            secondaryActions: actions.reversed.toList(),
+            actions: _actions(widget.deleteItem, widget.updateItem),
+            secondaryActions: _actions(widget.deleteItem, widget.updateItem)
+                .reversed
+                .toList(),
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 4),
               padding: EdgeInsets.all(8),
@@ -54,18 +59,21 @@ class _ListOfGoalsState extends State<ListOfGoals> {
         });
   }
 
-  List<Widget> actions = <Widget>[
-    IconSlideAction(
-      color: Colors.transparent,
-      iconWidget:
-          IconContainer(Icon(CupertinoIcons.delete_simple, color: Colors.red)),
-      onTap: () => print('+'),
-    ),
-    IconSlideAction(
-      color: Colors.transparent,
-      iconWidget:
-          IconContainer(Icon(CupertinoIcons.pencil, color: Colors.black54)),
-      onTap: () => print('-'),
-    ),
-  ];
+  List<Widget> _actions(Function deleteItem, Function updateItem) {
+    List<Widget> actions = <Widget>[
+      IconSlideAction(
+        color: Colors.transparent,
+        iconWidget: IconContainer(
+            Icon(CupertinoIcons.delete_simple, color: Colors.red)),
+        onTap: deleteItem,
+      ),
+      IconSlideAction(
+        color: Colors.transparent,
+        iconWidget:
+            IconContainer(Icon(CupertinoIcons.pencil, color: Colors.black54)),
+        onTap: () => updateItem,
+      ),
+    ];
+    return actions;
+  }
 }
