@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
             create: (context) => DatabaseBloc()..add(DatabaseLoadEvent())),
       ],
       child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: Colors.white
+        ),
         home: MainPage(),
       ),
     );
