@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class FloatingActionButtonWidget extends StatelessWidget {
   final Function method;
 
-  const FloatingActionButtonWidget({Key key,@required this.method}) : super(key: key);
+  const FloatingActionButtonWidget({Key key, @required this.method})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
       backgroundColor: Colors.white70,
       onPressed: method,
       child: Icon(Icons.add, color: Colors.black),
+      shape: CircleBorder(side: BorderSide()),
     );
   }
 }
