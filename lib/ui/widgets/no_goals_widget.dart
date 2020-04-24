@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/typewriter_text.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -26,6 +27,7 @@ class NoGoalsWidget extends StatelessWidget {
                           begin: Alignment.bottomRight,
                           end: Alignment.topCenter,
                           colors: [Colors.white, Colors.white54]),
+                      border: Border.all(),
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                     width: width,
@@ -45,13 +47,12 @@ class NoGoalsWidget extends StatelessWidget {
               tween: Tween(begin: 0.0, end: 1.0),
               builder: (context, child, opacity) {
                 return Opacity(
-                  opacity: opacity,
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    color: Colors.black,
-                  ),
-                );
+                    opacity: opacity,
+                    child: Stack(
+                      children: <Widget>[
+                        Lottie.asset("assets/circular_click.json"),
+                      ],
+                    ));
               }),
         )
       ],
