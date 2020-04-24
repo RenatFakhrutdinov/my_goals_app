@@ -15,7 +15,7 @@ class GoalItem {
     Map<String, dynamic> map = Map<String, dynamic>();
     map["id"] = id;
     map["title"] = title;
-    map["dateCreated"] = description;
+    map["description"] = description;
     map["date"] = date;
     return map;
   }
