@@ -59,8 +59,11 @@ class NoGoalsWidget extends StatelessWidget {
                               onTap: () {},
                             ),
                           ),
-                          Center(
-                            child: Lottie.asset("assets/click.json"),
+                          IgnorePointer(
+                            ignoring: true,
+                            child: Center(
+                              child: Lottie.asset("assets/click.json"),
+                            ),
                           ),
                         ],
                       ));
