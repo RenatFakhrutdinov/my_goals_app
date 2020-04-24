@@ -43,23 +43,24 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         child: SkyBackground(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BlocBuilder(
-                  bloc: _databaseBloc,
-                  builder: (context, state) {
-                    if (state is DatabaseLoadedState) {
-                      return _goals(state);
-                    } else if (state is DatabaseErrorState) {
-                      return Center(
-                        child: Text(Strings.errorMessage),
-                      );
-                    } else
-                      return Center(
-                        child: CupertinoActivityIndicator(),
-                      );
-                  }),
-            )),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlocBuilder(
+                bloc: _databaseBloc,
+                builder: (context, state) {
+                  if (state is DatabaseLoadedState) {
+                    return _goals(state);
+                  } else if (state is DatabaseErrorState) {
+                    return Center(
+                      child: Text(Strings.errorMessage),
+                    );
+                  } else
+                    return Center(
+                      child: CupertinoActivityIndicator(),
+                    );
+                }),
+          ),
+        ),
       ),
     );
   }
@@ -69,6 +70,7 @@ class _MainPageState extends State<MainPage> {
       return Center(
         child: Text("Empty"),
       );
-    } else return ListOfGoals(goals: state.goals);
+    } else
+      return ListOfGoals(goals: state.goals, bloc: _databaseBloc);
   }
 }

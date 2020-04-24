@@ -50,9 +50,10 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   }
 
   Stream<DatabaseState> _mapDeleteToState(DatabaseDeleteEvent event) async* {
-    try {} catch (e) {
+    try {
       await DatabaseHelper.db.delete(event.itemId);
       yield* _mapLoadToState();
+    } catch (e) {
       yield DatabaseErrorState(errorText: e.toString());
     }
   }
