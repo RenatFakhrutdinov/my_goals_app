@@ -13,12 +13,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  DatabaseBloc _bloc;
+  DatabaseBloc _databaseBloc;
 
   @override
   void initState() {
     super.initState();
-    _bloc = BlocProvider.of<DatabaseBloc>(context);
+    _databaseBloc = BlocProvider.of<DatabaseBloc>(context);
   }
 
   @override
@@ -35,9 +35,20 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
         child: SkyBackground(
-            child: Center(
-          child: Text("test"),
-        )),
+            child: BlocBuilder(
+                bloc: _databaseBloc,
+                builder: (context, state) {
+                  if (state is DatabaseLoadedState) {
+                    return Text(state.goals.toString());
+                  } else if (state is DatabaseErrorState) {
+                    return Center(
+                      child: Text(Strings.errorMessage),
+                    );
+                  } else
+                    return Center(
+                      child: CupertinoActivityIndicator(),
+                    );
+                })),
       ),
     );
   }
