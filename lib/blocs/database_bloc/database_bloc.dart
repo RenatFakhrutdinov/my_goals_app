@@ -10,13 +10,13 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
 
   @override
   Stream<DatabaseState> mapEventToState(DatabaseEvent event) async* {
-    if (state is DatabaseLoadEvent) {
+    if (event is DatabaseLoadEvent) {
       yield* _mapLoadToState();
-    } else if (state is DatabaseAddEvent) {
+    } else if (event is DatabaseAddEvent) {
       yield* _mapAddToState(event);
-    } else if (state is DatabaseUpdateEvent) {
+    } else if (event is DatabaseUpdateEvent) {
       yield* _mapUpdateToState(event);
-    } else if (state is DatabaseDeleteEvent) {
+    } else if (event is DatabaseDeleteEvent) {
       yield* _mapDeleteToState(event);
     }
   }
