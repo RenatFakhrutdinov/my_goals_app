@@ -31,7 +31,7 @@ class _MainPageState extends State<MainPage> {
           builder: (context, state) {
             if (state is DatabaseLoadedState && state.goals.isNotEmpty) {
               return FloatingActionButtonWidget(
-                method: () {},
+                onTap: () {},
               );
             } else
               return SizedBox.shrink();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mygoalsapp/res/strings.dart';
+import 'package:mygoalsapp/ui/widgets/floating_action_button_widget.dart';
 import 'package:mygoalsapp/ui/widgets/typewriter_text.dart';
 import 'package:simple_animations/simple_animations.dart';
 
@@ -41,20 +42,31 @@ class NoGoalsWidget extends StatelessWidget {
         ),
         Align(
           alignment: Alignment(0.0, 0.5),
-          child: PlayAnimation<double>(
-              duration: Duration(seconds: 3),
-              delay: Duration(milliseconds: 1500),
-              tween: Tween(begin: 0.0, end: 1.0),
-              builder: (context, child, opacity) {
-                return Opacity(
-                    opacity: opacity,
-                    child: Stack(
-                      children: <Widget>[
-                        Lottie.asset("assets/circular_click.json"),
-                      ],
-                    ));
-              }),
-        )
+          child: Container(
+            height: 200,
+            width: 200,
+            child: PlayAnimation<double>(
+                duration: Duration(milliseconds: 1500),
+                delay: Duration(milliseconds: 1500),
+                tween: Tween(begin: 0.0, end: 1.0),
+                builder: (context, child, opacity) {
+                  return Opacity(
+                      opacity: opacity,
+                      child: Stack(
+                        children: <Widget>[
+                          Center(
+                            child: FloatingActionButtonWidget(
+                              onTap: () {},
+                            ),
+                          ),
+                          Center(
+                            child: Lottie.asset("assets/click.json"),
+                          ),
+                        ],
+                      ));
+                }),
+          ),
+        ),
       ],
     );
   }
