@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mygoalsapp/res/strings.dart';
+import 'package:mygoalsapp/ui/widgets/typewriter_text.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class NoGoalsWidget extends StatelessWidget {
@@ -17,40 +19,20 @@ class NoGoalsWidget extends StatelessWidget {
             builder: (context, child, width) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.white70,
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomRight,
+                      end: Alignment.topCenter,
+                      colors: [Colors.white, Colors.white54]),
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
                 width: width,
                 height: height,
-                child: TypewriterText("Добавьте цель"),
+                child: TypewriterText(Strings.addGoal),
               );
             },
           );
         },
       ),
     );
-  }
-}
-
-class TypewriterText extends StatelessWidget {
-  final String text;
-
-  TypewriterText(this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return PlayAnimation<int>(
-        duration: Duration(milliseconds: 800),
-        delay: Duration(milliseconds: 800),
-        tween: IntTween(begin: 0, end: text.length),
-        builder: (context, child, textLength) {
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(text.substring(0, textLength),
-                  style: TextStyle(fontSize: 24)),
-            ],
-          );
-        });
   }
 }

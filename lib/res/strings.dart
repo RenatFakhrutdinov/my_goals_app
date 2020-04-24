@@ -3,4 +3,5 @@ class Strings {
   static const String errorMessage = "Что-то пошло не так";
   static const String delete = "Удалить";
   static const String update = "Изменить";
+  static const String addGoal = "Добавьте цель";
 }
