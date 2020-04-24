@@ -1,9 +1,10 @@
-import 'dart:math';
-
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mygoalsapp/database/database_helper.dart';
-import 'package:mygoalsapp/model/goal_item.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
+import 'package:mygoalsapp/res/strings.dart';
+import 'package:mygoalsapp/ui/widgets/floating_action_button_widget.dart';
 import 'package:sky_background/sky_background.dart';
 
 class MainPage extends StatefulWidget {
@@ -12,35 +13,26 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<GoalItem> list = [];
+  DatabaseBloc _databaseBloc;
+
   @override
   void initState() {
     super.initState();
-    DatabaseHelper.db
-        .insert(GoalItem(Random().nextInt(9999), "test", "Test", "test"));
+    _databaseBloc = BlocProvider.of<DatabaseBloc>(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        elevation: 0.0,
-        backgroundColor: Colors.white70,
-        onPressed: () {},
-        child: Icon(Icons.add, color: Colors.blue[300]),
-      ),
-      body: SkyBackground(
-          child: Center(
-        child: FutureBuilder(
-          future: DatabaseHelper.db.getGoals(),
-          builder: (context, AsyncSnapshot<List<GoalItem>> snapshot) {
-            if (snapshot.hasData) {
-              return Text(snapshot.data.toString());
-            } else
-              return CupertinoActivityIndicator();
-          },
-        ),
-      )),
+      floatingActionButton: FloatingActionButtonWidget(),
+      body: DoubleBackToCloseApp(
+          snackBar: SnackBar(
+            content: Text(
+              Strings.doubleBack,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          child: SkyBackground(child: Text('d'))),
     );
   }
 }

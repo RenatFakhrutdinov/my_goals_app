@@ -22,6 +22,7 @@ class DatabaseBloc extends Bloc<DatabaseEvent, DatabaseState> {
   }
 
   Stream<DatabaseState> _mapLoadToState() async* {
+    yield DatabaseLoadingState();
     try {
       List<GoalItem> goals = await DatabaseHelper.db.getGoals();
       yield DatabaseLoadedState(goals: goals);
