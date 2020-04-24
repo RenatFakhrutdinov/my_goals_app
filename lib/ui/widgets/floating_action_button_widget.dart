@@ -11,7 +11,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
       elevation: 0.0,
       backgroundColor: Colors.white70,
       onPressed: method,
-      child: Icon(Icons.add, color: Colors.blue[300]),
+      child: Icon(Icons.add, color: Colors.black),
     );
   }
 }
