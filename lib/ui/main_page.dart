@@ -6,6 +6,7 @@ import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/floating_action_button_widget.dart';
 import 'package:mygoalsapp/ui/widgets/list_of_goals.dart';
+import 'package:mygoalsapp/ui/widgets/no_goals_widget.dart';
 import 'package:sky_background/sky_background.dart';
 
 class MainPage extends StatefulWidget {
@@ -67,9 +68,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _goals(DatabaseLoadedState state) {
     if (state.goals.isEmpty) {
-      return Center(
-        child: Text("Empty"),
-      );
+      return NoGoalsWidget();
     } else
       return ListOfGoals(goals: state.goals, bloc: _databaseBloc);
   }
