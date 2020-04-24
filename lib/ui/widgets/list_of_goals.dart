@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:mygoalsapp/model/goal_item.dart';
+import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/icon_conainer.dart';
 
 class ListOfGoals extends StatefulWidget {
@@ -62,13 +63,17 @@ class _ListOfGoalsState extends State<ListOfGoals> {
   List<Widget> _actions(Function deleteItem, Function updateItem) {
     List<Widget> actions = <Widget>[
       IconSlideAction(
+        caption: Strings.delete,
+        foregroundColor: Colors.black,
         color: Colors.transparent,
         iconWidget: IconContainer(
             Icon(CupertinoIcons.delete_simple, color: Colors.red)),
         onTap: deleteItem,
       ),
       IconSlideAction(
+        caption: Strings.update,
         color: Colors.transparent,
+        foregroundColor: Colors.black,
         iconWidget:
             IconContainer(Icon(CupertinoIcons.pencil, color: Colors.black54)),
         onTap: () => updateItem,

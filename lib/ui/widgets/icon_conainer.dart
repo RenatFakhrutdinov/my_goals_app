@@ -7,12 +7,15 @@ class IconContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 64,
-        width: 64,
+        height: 48,
+        width: 48,
         decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white54,
-            border: Border.all()),
+          shape: BoxShape.circle,
+          gradient: RadialGradient(colors: <Color>[
+            Colors.white,
+            Color.fromRGBO(255, 255, 255, 0.01)
+          ]),
+        ),
         child: icon);
   }
 }
