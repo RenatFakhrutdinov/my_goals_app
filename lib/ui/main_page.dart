@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
-import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
+import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc_export.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/floating_action_button_widget.dart';
 import 'package:mygoalsapp/ui/widgets/list_of_goals.dart';
@@ -34,17 +34,15 @@ class _MainPageState extends State<MainPage> {
           bloc: _databaseBloc,
           builder: (context, databaseState) {
             if (databaseState is DatabaseLoadedState &&
-                databaseState.goals.isNotEmpty &&
-                _pageSwitcherBloc.state == PageSwitcherState.onMainScreen) {
+                databaseState.goals.isNotEmpty) {
               return BlocBuilder(
                   bloc: _pageSwitcherBloc,
                   builder: (context, pageState) {
                     ///displaing depends on PageSwitcherBloc state
-                    if (pageState == PageSwitcherState.onMainScreen) {
+                    if (pageState is PageSwitcherOnMainPage) {
                       return FloatingActionButtonWidget(
                         onTap: () {
-                          _pageSwitcherBloc
-                              .add(PageSwitcherEvent.toAddingGoalScreen);
+                          _pageSwitcherBloc.add(PageSwitcherToAddingWidget());
                         },
                       );
                     } else
@@ -72,7 +70,7 @@ class _MainPageState extends State<MainPage> {
                       return BlocBuilder(
                           bloc: _pageSwitcherBloc,
                           builder: (context, pageState) {
-                            if (pageState == PageSwitcherState.onMainScreen) {
+                            if (pageState is PageSwitcherOnMainPage) {
                               return _goals(databaseState);
                             } else
                               return WriteGoalWidget(

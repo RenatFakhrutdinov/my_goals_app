@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
-import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
+import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc_export.dart';
 import 'package:mygoalsapp/model/goal_item.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/icon_container.dart';
@@ -25,11 +25,22 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
   TextEditingController _titleController;
   TextEditingController _descriptionController;
 
+  int idOfGoalItem;
+
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: '');
-    _descriptionController = TextEditingController(text: '');
+
+    if (widget.pageBloc.state.props.last is GoalItem) {
+      GoalItem _tmpItem = widget.pageBloc.state.props.last;
+      idOfGoalItem = _tmpItem.id;
+      _titleController = TextEditingController(text: _tmpItem.title);
+      _descriptionController =
+          TextEditingController(text: _tmpItem.description);
+    } else {
+      _titleController = TextEditingController(text: '');
+      _descriptionController = TextEditingController(text: '');
+    }
   }
 
   @override
@@ -84,7 +95,7 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
                       color: Colors.black,
                     ),
                     onPressed: () =>
-                        widget.pageBloc.add(PageSwitcherEvent.toMainScreen),
+                        widget.pageBloc.add(PageSwitcherToMainPage()),
                   ),
                   isSlidable: false,
                 ),
@@ -109,8 +120,7 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
                                           _titleController.text,
                                           _descriptionController.text,
                                           DateTime.now().toString())));
-                                  widget.pageBloc
-                                      .add(PageSwitcherEvent.toMainScreen);
+                                  widget.pageBloc.add(PageSwitcherToMainPage());
                                 } else
                                   Toast.show(Strings.fillAllFields, context,
                                       gravity: 1);

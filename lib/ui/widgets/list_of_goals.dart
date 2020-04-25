@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
-import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
+import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc_export.dart';
 import 'package:mygoalsapp/model/goal_item.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/icon_container.dart';
@@ -32,18 +32,17 @@ class _ListOfGoalsState extends State<ListOfGoals> {
               Slidable(
                 actionPane: SlidableStrechActionPane(),
                 actions: _actions(
-                    deleteItem: () => widget.dataBloc
-                        .add(DatabaseDeleteEvent(widget.goals[index].id)),
-                    updateItem: () => widget.pageBloc
-                        .add(PageSwitcherEvent.toAddingGoalScreen)
-                    //widget.bloc.add(DatabaseUpdateEvent(GoalItem(index, "e", "e", "e"))),
-                    ),
-//                secondaryActions: _actions(
-//                  deleteItem: () => widget.dataBloc
-//                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
-//                  updateItem: () => widget.dataBloc
-//                      .add(DatabaseUpdateEvent(widget.goals[index])),
-//                ).reversed.toList(),
+                  deleteItem: () => widget.dataBloc
+                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
+                  updateItem: () => widget.pageBloc.add(
+                      PageSwitcherToAddingWidget(item: widget.goals[index])),
+                ),
+                secondaryActions: _actions(
+                  deleteItem: () => widget.dataBloc
+                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
+                  updateItem: () => widget.pageBloc.add(
+                      PageSwitcherToAddingWidget(item: widget.goals[index])),
+                ).reversed.toList(),
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 4),
                   padding: EdgeInsets.all(8),

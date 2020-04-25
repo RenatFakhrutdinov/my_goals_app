@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
 
 import 'blocs/database_bloc/database_bloc_export.dart';
+import 'blocs/page_switcher_bloc/page_switcher_bloc_export.dart';
 import 'blocs/simple_bloc_delegate.dart';
 import 'ui/main_page.dart';
 
