@@ -23,47 +23,56 @@ class _ListOfGoalsState extends State<ListOfGoals> {
     return ListView.builder(
         itemCount: widget.goals.length,
         itemBuilder: (context, index) {
-          return Slidable(
-            actionPane: SlidableStrechActionPane(),
-            actions: _actions(
-              deleteItem: () =>
-                  widget.bloc.add(DatabaseDeleteEvent(widget.goals[index].id)),
-              updateItem: () =>
-                  widget.bloc.add(DatabaseUpdateEvent(widget.goals[index])),
-            ),
-            secondaryActions: _actions(
-              deleteItem: () =>
-                  widget.bloc.add(DatabaseDeleteEvent(widget.goals[index].id)),
-              updateItem: () =>
-                  widget.bloc.add(DatabaseUpdateEvent(widget.goals[index])),
-            ).reversed.toList(),
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 4),
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                  gradient: LinearGradient(
-                      begin: Alignment.bottomRight,
-                      end: Alignment.topCenter,
-                      colors: [Colors.white, Colors.white54])),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Text(
-                    widget.goals[index].title,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          return Column(
+            children: <Widget>[
+              index == 0 ? SizedBox(height: 4) : SizedBox.shrink(),
+              Slidable(
+                actionPane: SlidableStrechActionPane(),
+                actions: _actions(
+                  deleteItem: () => widget.bloc
+                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
+                  updateItem: () =>
+                      widget.bloc.add(DatabaseUpdateEvent(widget.goals[index])),
+                ),
+                secondaryActions: _actions(
+                  deleteItem: () => widget.bloc
+                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
+                  updateItem: () =>
+                      widget.bloc.add(DatabaseUpdateEvent(widget.goals[index])),
+                ).reversed.toList(),
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: 4),
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topCenter,
+                          colors: [Colors.white, Colors.white54])),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text(
+                        widget.goals[index].title,
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text(
+                          widget.goals[index].description,
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Text(
-                      widget.goals[index].description,
-                      style: TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              index == widget.goals.length - 1
+                  ? SizedBox(height: 80)
+                  : SizedBox.shrink()
+            ],
           );
         });
   }

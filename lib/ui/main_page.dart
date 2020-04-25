@@ -63,7 +63,7 @@ class _MainPageState extends State<MainPage> {
         child: SafeArea(
           child: SkyBackground(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: BlocBuilder(
                   bloc: _databaseBloc,
                   builder: (context, databaseState) {
