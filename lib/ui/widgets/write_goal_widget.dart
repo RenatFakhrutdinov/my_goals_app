@@ -39,11 +39,20 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
               TextField(
                 controller: _titleController,
                 maxLength: 32,
-                decoration: InputDecoration(labelText: Strings.title),
+                decoration: InputDecoration(
+                    labelText: Strings.title,
+                    labelStyle: TextStyle(color: Colors.black45),
+                    counter: SizedBox.shrink(),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black))),
               ),
               TextField(
                 controller: _descriptionController,
-                decoration: InputDecoration(labelText: Strings.description),
+                decoration: InputDecoration(
+                    labelText: Strings.description,
+                    labelStyle: TextStyle(color: Colors.black45),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black))),
                 maxLines: 6,
                 minLines: 1,
               ),
