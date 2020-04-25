@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
+import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/floating_action_button_widget.dart';
 import 'package:mygoalsapp/ui/widgets/list_of_goals.dart';
@@ -16,11 +17,12 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   DatabaseBloc _databaseBloc;
-
+  PageSwitcherBloc _pageSwitcherBloc;
   @override
   void initState() {
     super.initState();
     _databaseBloc = BlocProvider.of<DatabaseBloc>(context);
+    _pageSwitcherBloc = BlocProvider.of<PageSwitcherBloc>(context);
   }
 
   @override
@@ -48,10 +50,25 @@ class _MainPageState extends State<MainPage> {
             padding: const EdgeInsets.all(8.0),
             child: BlocBuilder(
                 bloc: _databaseBloc,
-                builder: (context, state) {
-                  if (state is DatabaseLoadedState) {
-                    return _goals(state);
-                  } else if (state is DatabaseErrorState) {
+                builder: (context, databaseState) {
+                  if (databaseState is DatabaseLoadedState) {
+                    /// navigation controls by PageSwitchBloc
+                    return BlocBuilder(
+                        bloc: _pageSwitcherBloc,
+                        builder: (context, pageState) {
+                          if (pageState == PageSwitcherState.onMainScreen) {
+                            return _goals(databaseState);
+                          } else if (pageState ==
+                              PageSwitcherState.onAddingGoalScreen) {
+                            return Center(
+                              child: Text('test'),
+                            );
+                          } else
+                            return Center(
+                              child: Text('animation'),
+                            );
+                        });
+                  } else if (databaseState is DatabaseErrorState) {
                     return Center(
                       child: Text(Strings.errorMessage),
                     );
@@ -68,7 +85,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _goals(DatabaseLoadedState state) {
     if (state.goals.isEmpty) {
-      return NoGoalsWidget();
+      return NoGoalsWidget(pageBloc: _pageSwitcherBloc);
     } else
       return ListOfGoals(goals: state.goals, bloc: _databaseBloc);
   }

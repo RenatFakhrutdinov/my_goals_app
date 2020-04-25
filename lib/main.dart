@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
 
 import 'blocs/database_bloc/database_bloc_export.dart';
 import 'blocs/simple_bloc_delegate.dart';
@@ -22,11 +23,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<DatabaseBloc>(
             create: (context) => DatabaseBloc()..add(DatabaseLoadEvent())),
+        BlocProvider<PageSwitcherBloc>(create: (context) => PageSwitcherBloc())
       ],
       child: MaterialApp(
-        theme: ThemeData(
-          primaryColor: Colors.white
-        ),
+        theme: ThemeData(primaryColor: Colors.white),
         home: MainPage(),
       ),
     );

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/floating_action_button_widget.dart';
 import 'package:mygoalsapp/ui/widgets/typewriter_text.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class NoGoalsWidget extends StatelessWidget {
+  final PageSwitcherBloc pageBloc;
+
+  const NoGoalsWidget({Key key, @required this.pageBloc}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -56,7 +61,10 @@ class NoGoalsWidget extends StatelessWidget {
                         children: <Widget>[
                           Center(
                             child: FloatingActionButtonWidget(
-                              onTap: () {},
+                              onTap: () {
+                                pageBloc
+                                    .add(PageSwitcherEvent.toAddingGoalScreen);
+                              },
                             ),
                           ),
                           IgnorePointer(
