@@ -8,6 +8,7 @@ import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/floating_action_button_widget.dart';
 import 'package:mygoalsapp/ui/widgets/list_of_goals.dart';
 import 'package:mygoalsapp/ui/widgets/no_goals_widget.dart';
+import 'package:mygoalsapp/ui/widgets/write_goal_widget.dart';
 import 'package:sky_background/sky_background.dart';
 
 class MainPage extends StatefulWidget {
@@ -58,14 +59,9 @@ class _MainPageState extends State<MainPage> {
                         builder: (context, pageState) {
                           if (pageState == PageSwitcherState.onMainScreen) {
                             return _goals(databaseState);
-                          } else if (pageState ==
-                              PageSwitcherState.onAddingGoalScreen) {
-                            return Center(
-                              child: Text('test'),
-                            );
                           } else
                             return Center(
-                              child: Text('animation'),
+                              child: WriteGoalWidget(),
                             );
                         });
                   } else if (databaseState is DatabaseErrorState) {
