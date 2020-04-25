@@ -32,11 +32,24 @@ class _MainPageState extends State<MainPage> {
       resizeToAvoidBottomInset: false,
       floatingActionButton: BlocBuilder(
           bloc: _databaseBloc,
-          builder: (context, state) {
-            if (state is DatabaseLoadedState && state.goals.isNotEmpty) {
-              return FloatingActionButtonWidget(
-                onTap: () {},
-              );
+          builder: (context, databaseState) {
+            if (databaseState is DatabaseLoadedState &&
+                databaseState.goals.isNotEmpty &&
+                _pageSwitcherBloc.state == PageSwitcherState.onMainScreen) {
+              return BlocBuilder(
+                  bloc: _pageSwitcherBloc,
+                  builder: (context, pageState) {
+                    ///displaing depends on PageSwitcherBloc state
+                    if (pageState == PageSwitcherState.onMainScreen) {
+                      return FloatingActionButtonWidget(
+                        onTap: () {
+                          _pageSwitcherBloc
+                              .add(PageSwitcherEvent.toAddingGoalScreen);
+                        },
+                      );
+                    } else
+                      return SizedBox.shrink();
+                  });
             } else
               return SizedBox.shrink();
           }),
@@ -62,7 +75,10 @@ class _MainPageState extends State<MainPage> {
                             if (pageState == PageSwitcherState.onMainScreen) {
                               return _goals(databaseState);
                             } else
-                              return WriteGoalWidget();
+                              return WriteGoalWidget(
+                                pageBloc: _pageSwitcherBloc,
+                                databaseBloc: _databaseBloc,
+                              );
                           });
                     } else if (databaseState is DatabaseErrorState) {
                       return Center(
