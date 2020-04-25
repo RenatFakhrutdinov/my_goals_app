@@ -8,4 +8,5 @@ class Strings {
   static const String description = "Описание";
   static const String cancel = "Отмена";
   static const String add = "Добавить";
+  static const String fillAllFields = "Заполните все поля";
 }

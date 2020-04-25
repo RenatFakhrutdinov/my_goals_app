@@ -18,7 +18,7 @@ class NoGoalsWidget extends StatelessWidget {
         Align(
           alignment: Alignment(0.0, -0.5),
           child: PlayAnimation<double>(
-            duration: Duration(milliseconds: 1200),
+            duration: Duration(milliseconds: 800),
             tween:
                 Tween(begin: 2.0, end: MediaQuery.of(context).size.width - 32),
             builder: (context, child, width) {

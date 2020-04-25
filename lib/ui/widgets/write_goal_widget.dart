@@ -7,6 +7,7 @@ import 'package:mygoalsapp/model/goal_item.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/icon_conainer.dart';
 import 'package:mygoalsapp/utils/define_id.dart';
+import 'package:toast/toast.dart';
 
 class WriteGoalWidget extends StatefulWidget {
   final PageSwitcherBloc pageBloc;
@@ -108,7 +109,8 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
                                   widget.pageBloc
                                       .add(PageSwitcherEvent.toMainScreen);
                                 } else
-                                  print("покажи тост");
+                                  Toast.show(Strings.fillAllFields, context,
+                                      gravity: 1);
                               });
                         }),
                   ),
