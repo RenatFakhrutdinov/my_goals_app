@@ -18,29 +18,23 @@ class NoGoalsWidget extends StatelessWidget {
         Align(
           alignment: Alignment(0.0, -0.5),
           child: PlayAnimation<double>(
-            duration: Duration(milliseconds: 400),
-            tween: Tween(begin: 0.0, end: 80.0),
-            builder: (context, child, height) {
-              return PlayAnimation<double>(
-                duration: Duration(milliseconds: 1200),
-                delay: Duration(milliseconds: 500),
-                tween: Tween(
-                    begin: 2.0, end: MediaQuery.of(context).size.width - 32),
-                builder: (context, child, width) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.bottomRight,
-                          end: Alignment.topCenter,
-                          colors: [Colors.white, Colors.white54]),
-                      border: Border.all(),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                    ),
-                    width: width,
-                    height: height,
-                    child: TypewriterText(Strings.addGoal),
-                  );
-                },
+            duration: Duration(milliseconds: 1200),
+            delay: Duration(milliseconds: 400),
+            tween:
+                Tween(begin: 2.0, end: MediaQuery.of(context).size.width - 32),
+            builder: (context, child, width) {
+              return Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.bottomRight,
+                      end: Alignment.topCenter,
+                      colors: [Colors.white, Colors.white54]),
+                  border: Border.all(),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                width: width,
+                height: 80,
+                child: TypewriterText(Strings.addGoal),
               );
             },
           ),

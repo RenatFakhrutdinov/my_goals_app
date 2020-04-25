@@ -4,4 +4,6 @@ class Strings {
   static const String delete = "Удалить";
   static const String update = "Изменить";
   static const String addGoal = "Добавьте цель";
+  static const String title = "Название";
+  static const String description = "Описание";
 }

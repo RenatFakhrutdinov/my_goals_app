@@ -29,6 +29,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       floatingActionButton: BlocBuilder(
           bloc: _databaseBloc,
           builder: (context, state) {
@@ -46,33 +47,33 @@ class _MainPageState extends State<MainPage> {
             textAlign: TextAlign.center,
           ),
         ),
-        child: SkyBackground(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: BlocBuilder(
-                bloc: _databaseBloc,
-                builder: (context, databaseState) {
-                  if (databaseState is DatabaseLoadedState) {
-                    /// navigation controls by PageSwitchBloc
-                    return BlocBuilder(
-                        bloc: _pageSwitcherBloc,
-                        builder: (context, pageState) {
-                          if (pageState == PageSwitcherState.onMainScreen) {
-                            return _goals(databaseState);
-                          } else
-                            return Center(
-                              child: WriteGoalWidget(),
-                            );
-                        });
-                  } else if (databaseState is DatabaseErrorState) {
-                    return Center(
-                      child: Text(Strings.errorMessage),
-                    );
-                  } else
-                    return Center(
-                      child: CupertinoActivityIndicator(),
-                    );
-                }),
+        child: SafeArea(
+          child: SkyBackground(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BlocBuilder(
+                  bloc: _databaseBloc,
+                  builder: (context, databaseState) {
+                    if (databaseState is DatabaseLoadedState) {
+                      /// navigation controls by PageSwitchBloc
+                      return BlocBuilder(
+                          bloc: _pageSwitcherBloc,
+                          builder: (context, pageState) {
+                            if (pageState == PageSwitcherState.onMainScreen) {
+                              return _goals(databaseState);
+                            } else
+                              return WriteGoalWidget();
+                          });
+                    } else if (databaseState is DatabaseErrorState) {
+                      return Center(
+                        child: Text(Strings.errorMessage),
+                      );
+                    } else
+                      return Center(
+                        child: CupertinoActivityIndicator(),
+                      );
+                  }),
+            ),
           ),
         ),
       ),
