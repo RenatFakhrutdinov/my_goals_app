@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
+import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
 import 'package:mygoalsapp/model/goal_item.dart';
 import 'package:mygoalsapp/res/strings.dart';
 import 'package:mygoalsapp/ui/widgets/icon_container.dart';
 
 class ListOfGoals extends StatefulWidget {
   final List<GoalItem> goals;
-  final DatabaseBloc bloc;
+  final DatabaseBloc dataBloc;
+  final PageSwitcherBloc pageBloc;
 
-  const ListOfGoals({Key key, this.goals, this.bloc}) : super(key: key);
+  const ListOfGoals({Key key, this.goals, this.dataBloc, this.pageBloc})
+      : super(key: key);
 
   @override
   _ListOfGoalsState createState() => _ListOfGoalsState();
@@ -29,17 +32,18 @@ class _ListOfGoalsState extends State<ListOfGoals> {
               Slidable(
                 actionPane: SlidableStrechActionPane(),
                 actions: _actions(
-                  deleteItem: () => widget.bloc
-                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
-                  updateItem: () =>
-                      widget.bloc.add(DatabaseUpdateEvent(widget.goals[index])),
-                ),
-                secondaryActions: _actions(
-                  deleteItem: () => widget.bloc
-                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
-                  updateItem: () =>
-                      widget.bloc.add(DatabaseUpdateEvent(widget.goals[index])),
-                ).reversed.toList(),
+                    deleteItem: () => widget.dataBloc
+                        .add(DatabaseDeleteEvent(widget.goals[index].id)),
+                    updateItem: () => widget.pageBloc
+                        .add(PageSwitcherEvent.toAddingGoalScreen)
+                    //widget.bloc.add(DatabaseUpdateEvent(GoalItem(index, "e", "e", "e"))),
+                    ),
+//                secondaryActions: _actions(
+//                  deleteItem: () => widget.dataBloc
+//                      .add(DatabaseDeleteEvent(widget.goals[index].id)),
+//                  updateItem: () => widget.dataBloc
+//                      .add(DatabaseUpdateEvent(widget.goals[index])),
+//                ).reversed.toList(),
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 4),
                   padding: EdgeInsets.all(8),
@@ -93,7 +97,7 @@ class _ListOfGoalsState extends State<ListOfGoals> {
         foregroundColor: Colors.black,
         iconWidget:
             IconContainer(Icon(CupertinoIcons.pencil, color: Colors.black54)),
-        onTap: () => updateItem,
+        onTap: updateItem,
       ),
     ];
     return actions;

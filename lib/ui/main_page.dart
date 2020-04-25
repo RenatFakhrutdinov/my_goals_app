@@ -100,6 +100,9 @@ class _MainPageState extends State<MainPage> {
     if (state.goals.isEmpty) {
       return NoGoalsWidget(pageBloc: _pageSwitcherBloc);
     } else
-      return ListOfGoals(goals: state.goals, bloc: _databaseBloc);
+      return ListOfGoals(
+          goals: state.goals,
+          dataBloc: _databaseBloc,
+          pageBloc: _pageSwitcherBloc);
   }
 }
