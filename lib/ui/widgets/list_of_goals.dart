@@ -5,7 +5,7 @@ import 'package:mygoalsapp/blocs/database_bloc/database_bloc.dart';
 import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
 import 'package:mygoalsapp/model/goal_item.dart';
 import 'package:mygoalsapp/res/strings.dart';
-import 'package:mygoalsapp/ui/widgets/icon_conainer.dart';
+import 'package:mygoalsapp/ui/widgets/icon_container.dart';
 
 class ListOfGoals extends StatefulWidget {
   final List<GoalItem> goals;

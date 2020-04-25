@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 class IconContainer extends StatelessWidget {
   final Widget icon;
+  final bool isSlidable;
 
-  const IconContainer(this.icon, {Key key}) : super(key: key);
+  const IconContainer(this.icon, {this.isSlidable = true, Key key})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 64,
-        width: 64,
+        height: isSlidable ? 40 : 64,
+        width: isSlidable ? 40 : 64,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           gradient: RadialGradient(colors: <Color>[

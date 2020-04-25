@@ -5,7 +5,7 @@ import 'package:mygoalsapp/blocs/database_bloc/database_bloc_export.dart';
 import 'package:mygoalsapp/blocs/page_switcher_bloc/page_switcher_bloc.dart';
 import 'package:mygoalsapp/model/goal_item.dart';
 import 'package:mygoalsapp/res/strings.dart';
-import 'package:mygoalsapp/ui/widgets/icon_conainer.dart';
+import 'package:mygoalsapp/ui/widgets/icon_container.dart';
 import 'package:mygoalsapp/utils/define_id.dart';
 import 'package:toast/toast.dart';
 
@@ -77,14 +77,17 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
             Expanded(
                 child: Column(
               children: <Widget>[
-                IconContainer(IconButton(
-                  icon: Icon(
-                    CupertinoIcons.back,
-                    color: Colors.black,
+                IconContainer(
+                  IconButton(
+                    icon: Icon(
+                      CupertinoIcons.back,
+                      color: Colors.black,
+                    ),
+                    onPressed: () =>
+                        widget.pageBloc.add(PageSwitcherEvent.toMainScreen),
                   ),
-                  onPressed: () =>
-                      widget.pageBloc.add(PageSwitcherEvent.toMainScreen),
-                )),
+                  isSlidable: false,
+                ),
                 Text(Strings.cancel)
               ],
             )),
@@ -113,6 +116,7 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
                                       gravity: 1);
                               });
                         }),
+                    isSlidable: false,
                   ),
                   Text(Strings.add)
                 ],
