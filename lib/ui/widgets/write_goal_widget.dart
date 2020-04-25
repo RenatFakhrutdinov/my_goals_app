@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mygoalsapp/res/strings.dart';
+import 'package:mygoalsapp/ui/widgets/icon_conainer.dart';
 
 class WriteGoalWidget extends StatefulWidget {
   @override
@@ -19,33 +21,63 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 30,
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.bottomRight,
-            end: Alignment.topCenter,
-            colors: [Colors.white, Colors.white54]),
-        border: Border.all(),
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          TextField(
-            controller: _titleController,
-            maxLength: 32,
-            decoration: InputDecoration(labelText: Strings.title),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomRight,
+                end: Alignment.topCenter,
+                colors: [Colors.white, Colors.white54]),
+            border: Border.all(),
+            borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
-          TextField(
-            controller: _descriptionController,
-            decoration: InputDecoration(labelText: Strings.description),
-            maxLines: 6,
-            minLines: 1,
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: _titleController,
+                maxLength: 32,
+                decoration: InputDecoration(labelText: Strings.title),
+              ),
+              TextField(
+                controller: _descriptionController,
+                decoration: InputDecoration(labelText: Strings.description),
+                maxLines: 6,
+                minLines: 1,
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+                child: Column(
+              children: <Widget>[
+                IconContainer(IconButton(
+                  icon: Icon(
+                    CupertinoIcons.back,
+                    color: Colors.black,
+                  ),
+                  onPressed: null,
+                )),
+                Text(Strings.cancel)
+              ],
+            )),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  IconContainer(IconButton(
+                      icon: Icon(Icons.add, color: Colors.red),
+                      onPressed: null)),
+                  Text(Strings.add)
+                ],
+              ),
+            )
+          ],
+        )
+      ],
     );
   }
 }

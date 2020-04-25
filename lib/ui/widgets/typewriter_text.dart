@@ -10,7 +10,7 @@ class TypewriterText extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlayAnimation<int>(
         duration: Duration(milliseconds: 800),
-        delay: Duration(milliseconds: 800),
+        delay: Duration(milliseconds: 900),
         tween: IntTween(begin: 0, end: text.length),
         builder: (context, child, textLength) {
           return Row(
