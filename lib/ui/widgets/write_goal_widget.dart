@@ -112,25 +112,7 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
                           return IconButton(
                               icon: Icon(Icons.add, color: Colors.red),
                               onPressed: () {
-                                if (_titleController.text.isNotEmpty &&
-                                    _descriptionController.text.isNotEmpty) {
-                                  idOfGoalItem == null
-                                      ? widget.databaseBloc.add(
-                                          DatabaseAddEvent(GoalItem(
-                                              defineId(databaseState),
-                                              _titleController.text,
-                                              _descriptionController.text,
-                                              DateTime.now().toString())))
-                                      : widget.databaseBloc.add(
-                                          DatabaseUpdateEvent(GoalItem(
-                                              idOfGoalItem,
-                                              _titleController.text,
-                                              _descriptionController.text,
-                                              DateTime.now().toString())));
-                                  widget.pageBloc.add(PageSwitcherToMainPage());
-                                } else
-                                  Toast.show(Strings.fillAllFields, context,
-                                      gravity: 1);
+                                addButtonAction(databaseState);
                               });
                         }),
                     isSlidable: false,
@@ -143,5 +125,24 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
         )
       ],
     );
+  }
+
+  void addButtonAction(DatabaseState databaseState) {
+    if (_titleController.text.isNotEmpty &&
+        _descriptionController.text.isNotEmpty) {
+      idOfGoalItem == null
+          ? widget.databaseBloc.add(DatabaseAddEvent(GoalItem(
+              defineId(databaseState),
+              _titleController.text,
+              _descriptionController.text,
+              DateTime.now().toString())))
+          : widget.databaseBloc.add(DatabaseUpdateEvent(GoalItem(
+              idOfGoalItem,
+              _titleController.text,
+              _descriptionController.text,
+              DateTime.now().toString())));
+      widget.pageBloc.add(PageSwitcherToMainPage());
+    } else
+      Toast.show(Strings.fillAllFields, context, gravity: 1);
   }
 }
