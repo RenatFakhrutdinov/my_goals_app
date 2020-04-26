@@ -114,12 +114,19 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
                               onPressed: () {
                                 if (_titleController.text.isNotEmpty &&
                                     _descriptionController.text.isNotEmpty) {
-                                  widget.databaseBloc.add(DatabaseAddEvent(
-                                      GoalItem(
-                                          defineId(databaseState),
-                                          _titleController.text,
-                                          _descriptionController.text,
-                                          DateTime.now().toString())));
+                                  idOfGoalItem == null
+                                      ? widget.databaseBloc.add(
+                                          DatabaseAddEvent(GoalItem(
+                                              defineId(databaseState),
+                                              _titleController.text,
+                                              _descriptionController.text,
+                                              DateTime.now().toString())))
+                                      : widget.databaseBloc.add(
+                                          DatabaseUpdateEvent(GoalItem(
+                                              idOfGoalItem,
+                                              _titleController.text,
+                                              _descriptionController.text,
+                                              DateTime.now().toString())));
                                   widget.pageBloc.add(PageSwitcherToMainPage());
                                 } else
                                   Toast.show(Strings.fillAllFields, context,
