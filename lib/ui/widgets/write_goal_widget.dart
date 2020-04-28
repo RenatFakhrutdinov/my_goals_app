@@ -44,6 +44,13 @@ class _WriteGoalWidgetState extends State<WriteGoalWidget> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _titleController.dispose();
+    _descriptionController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
