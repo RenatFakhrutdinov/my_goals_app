@@ -1,6 +1,6 @@
-# MyGoalAapp / Приложение Мои Цели
+# MyGoalsApp / Приложение Мои Цели
 
-MyGoalAapp is a simple ToDo list app designed in Flutter to keep track of your tasks with Sqflite database. Its build on BLoC Pattern.
+MyGoalsApp is a simple ToDo list app designed in Flutter to keep track of your tasks with Sqflite database. Its build on BLoC Pattern.
 
 ## Screenshots
 
