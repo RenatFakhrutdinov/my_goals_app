@@ -15,6 +15,11 @@ main() {
       verify(await databaseHelper.getGoals());
     });
 
+    test('getGoals method returns List', () async {
+      when(databaseHelper.getGoals()).thenAnswer((_) => Future.value([item]));
+      expect(await databaseHelper.getGoals(), [item]);
+    });
+
     test('insert method pass', () async {
       await databaseHelper.insert(item);
       verify(await databaseHelper.insert(item));
