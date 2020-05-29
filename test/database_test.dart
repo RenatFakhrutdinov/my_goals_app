@@ -1,0 +1,33 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:mygoalsapp/database/database_helper.dart';
+import 'package:mygoalsapp/model/goal_item.dart';
+
+class MockDatabaseHelper extends Mock implements DatabaseHelper {}
+
+main() {
+  group('database tests', () {
+    final databaseHelper = MockDatabaseHelper();
+    GoalItem item = GoalItem(1, "title", "description", "today");
+
+    test('getGoals method pass', () async {
+      await databaseHelper.getGoals();
+      verify(await databaseHelper.getGoals());
+    });
+
+    test('insert method pass', () async {
+      await databaseHelper.insert(item);
+      verify(await databaseHelper.insert(item));
+    });
+
+    test('update method pass', () async {
+      await databaseHelper.update(item);
+      verify(await databaseHelper.update(item));
+    });
+
+    test('delete method pass', () async {
+      await databaseHelper.delete(1);
+      verify(await databaseHelper.delete(1));
+    });
+  });
+}
