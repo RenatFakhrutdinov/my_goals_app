@@ -25,6 +25,11 @@ main() {
       verify(await databaseHelper.insert(item));
     });
 
+    test('insert method returns GoalItem', () async {
+      when(databaseHelper.insert(item)).thenAnswer((_) => Future.value(item));
+      expect(await databaseHelper.insert(item), item);
+    });
+
     test('update method pass', () async {
       await databaseHelper.update(item);
       verify(await databaseHelper.update(item));
